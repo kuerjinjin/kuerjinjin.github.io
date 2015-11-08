@@ -112,7 +112,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android-Studio-App/" style="font-size: 10px;">Android Studio | App</a>
+						<a href="/tags/Android-Studio/" style="font-size: 10px;">Android Studio</a>
 					</div>
 				</section>
 				
@@ -241,7 +241,7 @@
 <p>   <strong>如果想要导入一个jar库并是它成为项目本身的模块</strong>，在菜单栏中找到 File -&gt; New -&gt; New module.. 选择 Import .JAR/.AAR Package,选择jar文件，在File -&gt; Project Struture…在Modules栏下就能看到我们刚才的jar模块了然后还是选择app，在右侧Dependencies选项卡下，点击右侧加号按钮，选择“3.Module Dependency”。能看到类似 compile project (‘libs/xxx.jar’)</p>
 <p>   <strong>如果是想要导入远程仓库里的库</strong>，以导入gson库为例：<br>   在菜单栏中找到 File -&gt; Project Struture…在Modules栏下找到app包名，在右侧Dependencies选项卡下，点击右侧加号按钮，选择“1.Library Dependency”,在弹出的对话框中输入 gson 点击右侧搜索按钮开始搜索，搜索结果中第一项：com.google.code.gson:gson:2.4 就是我们需要的库，点击ok。<br>   我们在MainActivity.xml的onCreate方法里面可以输入Gson出现正常的代码提示。找jar库我们需要在project下的build.gradle 在文件中选中“jcenter”，然后同时按下ctrl键并点击选中的“jcenter”会打开一个<br>   java中方法留存，在 MavenArtifactRepository jcenter();的方法说明中可以看到他是在 <a href="https://jcenter.bintray.com/" target="_blank" rel="external">jcenter.bintray.com</a>  查找下载库</p>
 <h2 id="14-版本控制：">14.版本控制：</h2><p>   <strong>下载并配置Git</strong>：<a href="http://git-scm.com/download/win" target="_blank" rel="external">下载网址</a> 安装时在选择组件页面去掉勾选“Windows Explorer integration”,其他默认；<br>   打开 <strong>Android Studio File -&gt; Settings -&gt; Version Control -&gt; Git</strong> 在 <strong>Path to Git executable</strong>中选择你的GIT安装路径，<br>   比如：F:\Program Files (x86)\Git\bin\git.exe，然后点击右侧的<strong>Test按钮</strong>，如果配置成功会提示成功并显示git的版本信息。</p>
-<p>   <strong>配置 GitHub</strong>: File -&gt; Settings -&gt; Version Control -&gt; GitHub 在右侧如果你没有账户可以点击蓝色连接按钮Sign up打开网页注册。<br>   win+r 输入 cmd 打开命令行，切换到git安装目录（我的是F:\Program Files (x86)\Git\bin\）然后输入以下命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email &#34;kuerjinjin@gmail.com&#34; &#9;# &#28216;&#25103;&#20889;&#33258;&#24049;&#30340;&#10;git config --global user.name &#34;kuerjinjin&#34; &#9;&#9;&#9;# &#21517;&#31216;&#20889;&#33258;&#24049;&#30340;</span><br></pre></td></tr></table></figure></p>
+<p>   <strong>配置 GitHub</strong>: File -&gt; Settings -&gt; Version Control -&gt; GitHub 在右侧如果你没有账户可以点击蓝色连接按钮Sign up打开网页注册。<br>   win+r 输入 cmd 打开命令行，切换到git安装目录（我的是F:\Program Files (x86)\Git\bin\）然后输入以下命令：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="keyword">global</span> user.email <span class="string">"kuerjinjin@gmail.com"</span> 	<span class="comment"># 游戏写自己的</span></span><br><span class="line">git config --<span class="keyword">global</span> user.name <span class="string">"kuerjinjin"</span> 			<span class="comment"># 名称写自己的</span></span><br></pre></td></tr></table></figure></p>
 <p>然后在File -&gt; Settings -&gt; Version Control -&gt; GitHub 右侧的Login 和 Password 填写自己申请的GitHub账户密码，点击Test按钮测试。<br>如果成功会弹出配置成功的提醒。点击ok之后如果你是第一次配置会需要你设置一个主分支密码（Master Password）。<br>然后点击菜单栏 <strong>CVS -&gt; Import into Version Control -&gt; Share project on GitHub</strong> 在弹出的对话框中名称要注意空格和特殊字符的问题，<br>然后点击share,默认是所有的项目文件都会被勾选，点击OK。等待片刻在右上角会有提示分享成功！点击带项目名称的连接按钮打开网页。</p>
 <p>对于不想签入到分享项目中的文件可以点击project窗口，下拉选择 project 找到 <code>.gitignore</code> 文件，这个文件列出了不会上传的文件列表。<br>比如/local.properties 文件是包含你当前计算机目录结构的特意信息，其中列出的JDK位置信息是你当前计算机中并不适合其他的计算机。<br>比如 .DS_Store 是MAC OS 系统自动生成的包含你计算机的信息等，默认情况下我们不需要修改 .gitignore 文件，如果你有不想被签入到<br>分享项目的文件你也可以在这个文件里添加。</p>
 <p>如果想恢复本地已经删除但是之前分享到GitHub的项目源码：<br>首先File -&gt; Close project 打开欢迎页，在左侧的Recent Projects 中将鼠标移动到要删除的项目列表上按下Backspace键删除项目，<br>然后在物理目录下真实删除项目文件并情况回收站！<br>回到 Android Studio 欢迎页右侧 Check out project from Version Control 选择 GitHub，在弹出的对话框中需要填写 Git Repository URL<br>这个URL可以打开你的项目地址 如：<a href="https://github.com/kuerjinjin/my_application" target="_blank" rel="external">https://github.com/kuerjinjin/my_application</a> 右下角有个 HTTPS clone URL 复制一下填到这里面，然后<br>点击后边的Test，如果成功会有提示成功！下边要恢复到的位置和名称可以自定义,然后点击 clone.成功之后会提示你是否打开这个项目。</p>
@@ -261,7 +261,7 @@
       
       
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio-App/">Android Studio | App</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li></ul>
 	</div>
 
       
