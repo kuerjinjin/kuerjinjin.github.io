@@ -17,7 +17,7 @@
 
 1.关于Android Studio  2014年12月开始 Android Studio 作为谷歌官方唯一的IDE并发布版本1，Eclipse ADT已经不再开发维护了.
 2.JDK的安装  安装 Android Studio 之前需要先安装 J">
-<meta property="og:updated_time" content="2015-11-08T07:18:35.648Z">
+<meta property="og:updated_time" content="2015-11-10T03:18:06.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Studio 基础入门笔记">
 <meta name="twitter:description" content="这是刚开始接触 Android Studio 记录下来的笔记，针对以前从来没有使用过该工具开发安卓APP的朋友快速了解并上手使用开发APP比较有用。
@@ -270,7 +270,9 @@
 <p>   断点的设置跟一般的IDE一样也是在行号右边点击添加断点， Shift+F9 开始调试的时候断到断点的位置，按下F8可以单步调试，F9暂停！调试中的信息可以在Debugger中看到，变量的值可以直接将鼠标放到变量上或者看Debugger里面的Variables会有可用的变量值变化。如果想添加变量监视（Watches），可以在Debugger右侧的Watches中点击加号添加，也可以直接选择变量右键Add to Watches,效果是一样的。另外一个调试技巧就是：右键单击断点会弹出一个对话框，可以增加筛选条件，比如：Condition里面修改Conter==9,即当Conter值为9时断下来。</p>
 <p>   对于之前习惯使用Eclipse+ADT的安卓开发人员来说，以前比较熟悉的DDMS视图在Android Studio中的名称叫做<code>安卓设备监视器</code>，打开方式就是：<br>   点击菜单栏 <strong>Tools -&gt; Android -&gt; Android Device Monitor</strong></p>
 <h2 id="17-签名打包成apk的方法">17.签名打包成apk的方法</h2><p>点击菜单栏 <strong>Build -&gt; Generate Signed APK</strong> 在弹出的窗口中点击 Create New 选择jks签名文件的存放路径(默认的路径是C:\Users\Administrator，我们把它放在当前目录下的.<br>android文件夹中就可以，以后打包直接选择这个签名文件打包),设置密码；下边的Alias其他名称随便写个类似的，设置密码；下面需要配置作者姓名，组织结构公司名等，还有省市以及国家编码那个写CN，OK之后选择记住密码；<br>下一步里面构建方式选择release,至于APK存放位置默认就在项目目录app下，也可以改成别的位置，最终生成的apk就是：app-release.apk</p>
-<h2 id="18-其他">18.其他</h2><p>   1)Ctrl+点击变量名 导航到定义：比如java文件中的资源控件变量可以直接在按下Ctrl键的同时点击变量能直接导航到定义控件的xml文件中，<br>   同样XML文件中的关联的方法也可以同时按下Ctrl并点击绑定的方法名也是能导航到java文件中的方法中去，非常方便~</p>
+<h2 id="18-导出jar包">18.导出jar包</h2><p>   在图形界面上，AS是没有直接导出jar这个功能的，但是因为AS是使用的gradlew构建项目，那么就可以使用gradlew的规则来修改一下项目配置：<br>   打开Module下的 build.gradle 修改第一行的 <code>apply plugin: &#39;com.android.application&#39;</code> 为 <code>apply plugin: &#39;com.android.library&#39;</code>；<br>   然后删除 android-&gt;defaultConfig 节点下的 <code>applicationId &quot;com.kuerjinjin.kenny.library&quot;</code> 这一正行的代码；<br>   在文件最后加上如下代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function">task <span class="title">makeJar</span><span class="params">(type: Copy)</span> </span>&#123;</span><br><span class="line">  delete <span class="string">'build/libs/testlib.jar'</span></span><br><span class="line">  from(<span class="string">'build/intermediates/bundles/release/'</span>)</span><br><span class="line">  into(<span class="string">'build/libs/'</span>)</span><br><span class="line">  include(<span class="string">'classes.jar'</span>)</span><br><span class="line">  rename (<span class="string">'classes.jar'</span>, <span class="string">'testlib.jar'</span>)</span><br><span class="line">&#125;</span><br><span class="line">makeJar.dependsOn(build)</span><br></pre></td></tr></table></figure></p>
+<p>  在Terminal窗口中执行命令 <code>gradlew makeJar</code> ，注意：第一次执行这个命令的时候会下载安装一些诸如 gradle-2.4-all.zip 之类的东西不要关闭退出，等他下载完。<br>  BUILD SUCCESSFUL 之后我们就可以在 项目名称\app\build\libs 文件夹下找到这个 <code>testlib.jar</code> 的包了！</p>
+<h2 id="19-其他">19.其他</h2><p>   1)Ctrl+点击变量名 导航到定义：比如java文件中的资源控件变量可以直接在按下Ctrl键的同时点击变量能直接导航到定义控件的xml文件中，<br>   同样XML文件中的关联的方法也可以同时按下Ctrl并点击绑定的方法名也是能导航到java文件中的方法中去，非常方便~</p>
 <p>   2)内存监视包括GPU,CPU,网络等监视功能都已经整合到Android Monitor窗口中。</p>
 
       
